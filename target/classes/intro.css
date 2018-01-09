@@ -3,3 +3,9 @@
 	-fx-font-smoothing-type: lcd;
 	-fx-font-color: #000000;
 	}
+	
+.loading-text {
+	-fx-font-size: 32px;
+	-fx-font-smoothing-type: lcd;
+	-fx-font-color: #ffffff;
+}
