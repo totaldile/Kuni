@@ -1,11 +1,17 @@
 .intro-text {
 	-fx-font-size: 24px;
 	-fx-font-smoothing-type: lcd;
-	-fx-font-color: #000000;
+	-fx-text-fill: #000000;
 	}
 	
 .loading-text {
 	-fx-font-size: 32px;
 	-fx-font-smoothing-type: lcd;
-	-fx-font-color: #ffffff;
+	-fx-text-fill: #ffffff;
+}
+
+.menubutton-text {
+	-fx-font-size: 20px;
+	-fx-font-smoothing-type: lcd;
+	-fx-text-fill: #ffffff;
 }
