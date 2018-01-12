@@ -2,6 +2,7 @@ package kuni;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import logic.Kuni;
 import window.MainWindow;
 
 public class Main extends Application {
@@ -12,6 +13,7 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		MainWindow m = new MainWindow(primaryStage);
+		@SuppressWarnings("unused")
+		MainWindow m = new MainWindow(primaryStage, new Kuni());
 	}
 }

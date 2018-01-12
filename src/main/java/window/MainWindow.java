@@ -14,19 +14,27 @@ import javafx.geometry.Bounds;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import kuni.MenuController;
+import logic.Kuni;
 
 public class MainWindow {
 	
-	Stage stage;
+	//private Kuni kuni;
+	private MenuController menuController;
 	
-	public MainWindow(Stage primaryStage) throws Exception {
+	private Stage stage;
+	private MenuButton button;
+	
+	public MainWindow(Stage primaryStage, Kuni game) throws Exception {
+		//this.kuni = game;
+		this.menuController = new MenuController(game, this);
 		this.stage = primaryStage;
+		button = new MenuButton("eh", 10, 10);
 		playLoadingSequence();
 		System.setProperty("prism.lcdtext", "false"); //may or may not improve crispness
 		System.setProperty("prism.text", "t2k"); //map or may not improve crispness
@@ -41,6 +49,8 @@ public class MainWindow {
 	 */
 	public void initiateMainMenu() {
 		Group root = new Group();
+		button.setOnMouseEntered(menuController);
+		button.setOnMouseExited(menuController);
 		Scene scene = new Scene(root, 800, 600, Color.BLACK);
         try {
 			scene.getStylesheets().add(this.getClass().getResource("/intro.css").toURI().toString());
@@ -48,8 +58,8 @@ public class MainWindow {
 			e1.printStackTrace();
 		}
         stage.setScene(scene);
-		MenuButton m = new MenuButton("new game", 50, 50);
-		m.draw(root);
+		button = new MenuButton("new game", 50, 50);
+		button.draw(root);
 		stage.show();
 	}
 	
@@ -142,6 +152,10 @@ public class MainWindow {
         timeline.play();
         
         stage.show();
+	}
+	
+	public MenuButton getButton() {
+		return button;
 	}
 
 }
