@@ -19,14 +19,12 @@ public class MenuController implements EventHandler<MouseEvent> {
 	 * This event handles the hovering-over of menu buttons.
 	 */
 	public void handle(MouseEvent mouse) {
-		System.out.println("here!");
 		if(mouse.getEventType().equals(MouseEvent.MOUSE_ENTERED)) {
 			view.getButton().onHover();
 		}
 		else if(mouse.getEventType().equals(MouseEvent.MOUSE_EXITED)) {
 			view.getButton().stopHover();
 		}
-		//view.getButton().collision(mouse.getSceneX(), mouse.getSceneY());
 	}
 
 

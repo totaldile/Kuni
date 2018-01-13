@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
@@ -47,7 +49,19 @@ public class MenuButton extends Rectangle {
         this.setStroke(Color.WHITE);
         this.setStrokeWidth(2);
         this.setFill(Color.TRANSPARENT);
-        timeline = new Timeline();
+        timeline = new Timeline(
+        		new KeyFrame(new Duration(1500), new KeyValue(text.fillProperty(), Color.web("#fff6aa"))),
+        		new KeyFrame(new Duration(1500), new KeyValue(this.strokeProperty(), Color.web("#fff6aa"))),
+        		new KeyFrame(new Duration(3000), new KeyValue(text.fillProperty(), Color.web("#b4ffaa"))),
+        		new KeyFrame(new Duration(3000), new KeyValue(this.strokeProperty(), Color.web("#b4ffaa"))),
+        		new KeyFrame(new Duration(4500), new KeyValue(text.fillProperty(), Color.web("#b0aaff"))),
+        		new KeyFrame(new Duration(4500), new KeyValue(this.strokeProperty(), Color.web("#b0aaff"))),
+        		new KeyFrame(new Duration(6000), new KeyValue(text.fillProperty(), Color.web("#ffaafc"))),
+        		new KeyFrame(new Duration(6000), new KeyValue(this.strokeProperty(), Color.web("#ffaafc"))),
+        		new KeyFrame(new Duration(7500), new KeyValue(text.fillProperty(), Color.web("#ffffff"))),
+        		new KeyFrame(new Duration(7500), new KeyValue(this.strokeProperty(), Color.web("#ffffff")))
+        		);
+        timeline.setCycleCount(Timeline.INDEFINITE);
 	}
 	
 	/**
@@ -79,26 +93,14 @@ public class MenuButton extends Rectangle {
 	 * 
 	 */
 	public void onHover() {
-		System.out.println("something in");
-		if(hover == true) return;
-		else{
-			hover = true;
-			System.out.println("Hovering!");
-			//timeline.playFrom(duration);
-		}
+			timeline.playFrom(duration);
 	}
 	
 	public void stopHover() {
-		System.out.println("something out");
-		if(hover == false) return;
-		else{
-			//duration = timeline.currentTimeProperty().getValue();
-			//timeline.stop();
-			System.out.println("No longer hovering!");
-			//text.setFill(Color.WHITE);
-			//rec.setStroke(Color.WHITE);
-			hover = false;
-		}
+			duration = timeline.currentTimeProperty().getValue();
+			timeline.stop();
+			text.setFill(Color.WHITE);
+			this.setStroke(Color.WHITE);
 
 	}
 

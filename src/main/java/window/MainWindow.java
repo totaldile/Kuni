@@ -13,6 +13,8 @@ import javafx.event.EventHandler;
 import javafx.geometry.Bounds;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -49,8 +51,6 @@ public class MainWindow {
 	 */
 	public void initiateMainMenu() {
 		Group root = new Group();
-		button.setOnMouseEntered(menuController);
-		button.setOnMouseExited(menuController);
 		Scene scene = new Scene(root, 800, 600, Color.BLACK);
         try {
 			scene.getStylesheets().add(this.getClass().getResource("/intro.css").toURI().toString());
@@ -60,6 +60,17 @@ public class MainWindow {
         stage.setScene(scene);
 		button = new MenuButton("new game", 50, 50);
 		button.draw(root);
+		button.setOnMouseEntered(menuController);
+		button.setOnMouseExited(menuController);
+		
+		try {
+			String mp3 = this.getClass().getResource("/Shadowlands-purple-planet-dot-com.mp3").toURI().toString();
+			AudioClip mp = new AudioClip(new Media(mp3).getSource());
+			System.out.println("playing");
+			mp.play();
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
 		stage.show();
 	}
 	
