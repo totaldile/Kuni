@@ -58,7 +58,8 @@ public class MainWindow {
 			e1.printStackTrace();
 		}
         stage.setScene(scene);
-		button = new MenuButton("new game", 50, 50);
+		button = new MenuButton("new game", 50, 200);
+		button.setNewX((scene.getWidth()/2) - (button.getWidth()/2));
 		button.draw(root);
 		button.setOnMouseEntered(menuController);
 		button.setOnMouseExited(menuController);

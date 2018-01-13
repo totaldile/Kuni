@@ -75,6 +75,24 @@ public class MenuButton extends Rectangle {
 	}
 	
 	/**
+	 * Changes the x-coordinate of the MenuButton.
+	 * @param x
+	 */
+	public void setNewX(double x) {
+		text.setLayoutX(x);
+		this.setX(x);
+	}
+	
+	/**
+	 * Changes the y-coordinate of the MenuButton.
+	 * @param y
+	 */
+	public void setNetY(double y) {
+		text.setY(y);
+		this.setY(y);
+	}
+	
+	/**
 	 * Returns true if the co-ordinates are contained within the bounds of the button.
 	 * Else, returns false.
 	 * @param x
@@ -89,9 +107,6 @@ public class MenuButton extends Rectangle {
 		else return false;
 	}
 	
-	/**
-	 * 
-	 */
 	public void onHover() {
 			timeline.playFrom(duration);
 	}
