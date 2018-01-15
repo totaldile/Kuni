@@ -36,13 +36,11 @@ public class MainWindow {
 		//this.kuni = game;
 		this.menuController = new MenuController(game, this);
 		this.stage = primaryStage;
+		stage.setResizable(false);
 		button = new MenuButton("eh", 10, 10);
 		playLoadingSequence();
 		System.setProperty("prism.lcdtext", "false"); //may or may not improve crispness
 		System.setProperty("prism.text", "t2k"); //map or may not improve crispness
-		//main menu now loads after the animation; next goal is animated menu buttons
-		//css styles are probably irrelevant now - easier to do them in the code
-		//playOpeningSequence();
 	}
 	
 	/**
@@ -58,7 +56,7 @@ public class MainWindow {
 			e1.printStackTrace();
 		}
         stage.setScene(scene);
-		button = new MenuButton("new game", 50, 200);
+		button = new MenuButton("new game", 50, 300);
 		button.setNewX((scene.getWidth()/2) - (button.getWidth()/2));
 		button.draw(root);
 		button.setOnMouseEntered(menuController);

@@ -42,8 +42,11 @@ public class MenuButton extends Rectangle {
         text.setFill(Color.WHITE);
         Bounds b = text.getLayoutBounds();
         // = new Rectangle(xPos - 5, yPos - b.getHeight() - 2, b.getWidth() + 10, b.getHeight() + 10);
-        this.setX(x - 5);
-        this.setY(y - b.getHeight() - 2);
+        //this.setX(x - 5);
+        setNewX(x);
+        //this.setY(y - b.getHeight() - 2);
+        setNewY(y);
+        System.out.println("y: " + y);
         this.setWidth(b.getWidth() + 10);
         this.setHeight(b.getHeight() + 10);
         this.setStroke(Color.WHITE);
@@ -79,7 +82,7 @@ public class MenuButton extends Rectangle {
 	 * @param x
 	 */
 	public void setNewX(double x) {
-		text.setLayoutX(x);
+		text.setLayoutX(x + 5);
 		this.setX(x);
 	}
 	
@@ -87,8 +90,8 @@ public class MenuButton extends Rectangle {
 	 * Changes the y-coordinate of the MenuButton.
 	 * @param y
 	 */
-	public void setNetY(double y) {
-		text.setY(y);
+	public void setNewY(double y) {
+		text.setLayoutY(y + text.getLayoutBounds().getHeight() + 1);
 		this.setY(y);
 	}
 	
