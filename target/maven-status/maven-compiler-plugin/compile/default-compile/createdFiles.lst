@@ -3,5 +3,4 @@ window\MainWindow.class
 window\MenuButton.class
 kuni\Main.class
 logic\Kuni.class
-kuni\Controller.class
 window\MainWindow$1.class

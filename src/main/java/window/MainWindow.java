@@ -16,6 +16,10 @@ import javafx.scene.Scene;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.LinearGradient;
+import javafx.scene.paint.Stop;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
@@ -30,17 +34,21 @@ public class MainWindow {
 	private MenuController menuController;
 	
 	private Stage stage;
-	private MenuButton button;
+	private MenuButton newGameButton;
+	private MenuButton quitButton;
+	private MenuButton optionsButton;
 	
 	public MainWindow(Stage primaryStage, Kuni game) throws Exception {
 		//this.kuni = game;
 		this.menuController = new MenuController(game, this);
 		this.stage = primaryStage;
 		stage.setResizable(false);
-		button = new MenuButton("eh", 10, 10);
+		newGameButton = new MenuButton("eh", 10, 10);
+		quitButton = new MenuButton("quit", 10, 10);
+		optionsButton = new MenuButton("op", 10, 10);
 		playLoadingSequence();
-		System.setProperty("prism.lcdtext", "false"); //may or may not improve crispness
-		System.setProperty("prism.text", "t2k"); //map or may not improve crispness
+		//System.setProperty("prism.lcdtext", "false"); //may or may not improve crispness
+		//System.setProperty("prism.text", "t2k"); //map or may not improve crispness
 	}
 	
 	/**
@@ -50,27 +58,56 @@ public class MainWindow {
 	public void initiateMainMenu() {
 		Group root = new Group();
 		Scene scene = new Scene(root, 800, 600, Color.BLACK);
-        try {
-			scene.getStylesheets().add(this.getClass().getResource("/intro.css").toURI().toString());
-		} catch (URISyntaxException e1) {
-			e1.printStackTrace();
-		}
-        stage.setScene(scene);
-		button = new MenuButton("new game", 50, 300);
-		button.setNewX((scene.getWidth()/2) - (button.getWidth()/2));
-		button.draw(root);
-		button.setOnMouseEntered(menuController);
-		button.setOnMouseExited(menuController);
 		
+        stage.setScene(scene);
+        
+        Rectangle background = new Rectangle(scene.getWidth(), scene.getHeight(),
+        		new LinearGradient(scene.getWidth() / 200, 0, scene.getWidth() / 200, scene.getHeight()/100, true, CycleMethod.NO_CYCLE, new Stop[] {
+        				new Stop(0, Color.web("#000000")),
+        	            new Stop(0.85, Color.web("#001b47"))
+        		}));
+        
+        background.widthProperty().bind(scene.widthProperty());
+        background.heightProperty().bind(scene.heightProperty());
+        root.getChildren().add(background);
+        
+		newGameButton = new MenuButton("new game", 50, 300);
+		newGameButton.setNewX((scene.getWidth()/2) - (newGameButton.getWidth()/2));
+		newGameButton.draw(root);
+		setOnMouse(newGameButton);
+		
+		optionsButton = new MenuButton("options", 50, 300 + 10 + newGameButton.getHeight());
+		optionsButton.setNewX((scene.getWidth()/2) - (optionsButton.getWidth()/2));
+		optionsButton.draw(root);
+		setOnMouse(optionsButton);
+		
+		quitButton = new MenuButton("quit", 50, 300 + 10 + newGameButton.getHeight() + 10 + optionsButton.getHeight());
+		quitButton.setNewX((scene.getWidth()/2) - (quitButton.getWidth()/2));
+		quitButton.draw(root);
+		setOnMouse(quitButton);
+		
+
+		
+		//set-up music
 		try {
 			String mp3 = this.getClass().getResource("/Shadowlands-purple-planet-dot-com.mp3").toURI().toString();
 			AudioClip mp = new AudioClip(new Media(mp3).getSource());
-			System.out.println("playing");
 			mp.play();
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
 		stage.show();
+	}
+	
+	/**
+	 * Helper method to reduce code repetitiveness.
+	 * Assigns menuController for MouseEntered, MouseExited, and MouseClicked
+	 * @param b
+	 */
+	public void setOnMouse(MenuButton b) {
+		b.setOnMouseEntered(menuController);
+		b.setOnMouseExited(menuController);
+		b.setOnMouseClicked(menuController);
 	}
 	
 	/**
@@ -164,8 +201,37 @@ public class MainWindow {
         stage.show();
 	}
 	
-	public MenuButton getButton() {
-		return button;
+	/**
+	 * Returns the New Game button.
+	 * @return
+	 */
+	public MenuButton getNewGameButton() {
+		return newGameButton;
+	}
+	
+	/**
+	 * Returns the Quit button.
+	 * @return
+	 */
+	public MenuButton getQuitButton() {
+		return quitButton;
+	}
+	
+	/**
+	 * Returns the Options button.
+	 * @return
+	 */
+	public MenuButton getOptionsButton() {
+		return optionsButton;
+	}
+	
+	/**
+	 * Returns an array of all the menu-screen buttons.
+	 * @return
+	 */
+	public MenuButton[] getButtons() {
+		MenuButton[] m = {newGameButton, optionsButton, quitButton};
+		return m;
 	}
 
 }

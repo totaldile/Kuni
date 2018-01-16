@@ -4,6 +4,7 @@ import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import logic.Kuni;
 import window.MainWindow;
+import window.MenuButton;
 
 public class MenuController implements EventHandler<MouseEvent> {
 	
@@ -20,11 +21,12 @@ public class MenuController implements EventHandler<MouseEvent> {
 	 */
 	public void handle(MouseEvent mouse) {
 		if(mouse.getEventType().equals(MouseEvent.MOUSE_ENTERED)) {
-			view.getButton().onHover();
+			((MenuButton) mouse.getSource()).onHover();
 		}
 		else if(mouse.getEventType().equals(MouseEvent.MOUSE_EXITED)) {
-			view.getButton().stopHover();
+			((MenuButton) mouse.getSource()).stopHover();
 		}
+		
 	}
 
 
