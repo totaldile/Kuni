@@ -21,6 +21,7 @@ import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.Stop;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontSmoothingType;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
@@ -70,6 +71,20 @@ public class MainWindow {
         background.widthProperty().bind(scene.widthProperty());
         background.heightProperty().bind(scene.heightProperty());
         root.getChildren().add(background);
+        
+        Text title = new Text("Kuni");
+        try { 
+            Font f = Font.loadFont(new FileInputStream(new File("src/main/resources/kuchibue.ttf")), 150);
+            title.setFont(f);
+          } catch (FileNotFoundException e) {
+            e.printStackTrace();
+          }
+        title.setTextAlignment(TextAlignment.JUSTIFY);
+        title.setLayoutX((scene.getWidth()/2) - (title.getLayoutBounds().getWidth()/2));
+        title.setLayoutY(150);
+        title.setFill(Color.WHITE); 
+        title.setFontSmoothingType(FontSmoothingType.LCD);
+        root.getChildren().add(title);
         
 		newGameButton = new MenuButton("new game", 50, 300);
 		newGameButton.setNewX((scene.getWidth()/2) - (newGameButton.getWidth()/2));
